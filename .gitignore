@@ -1,2 +1,7 @@
 # Project exclude paths
 /venv/
+/sr28asc/
+/categories.json
+/categories_i18n.json
+/food_i18n.json
+/food.json
