@@ -3,6 +3,11 @@ GROUP_DESCRIPTION_FILE_PATH = 'sr28asc/FD_GROUP.txt'
 NUTRIENT_DEFINITION_FILE_PATH = 'sr28asc/NUTR_DEF.txt'
 NUTRIENT_DATA_FILE_PATH = 'sr28asc/NUT_DATA.txt'
 
+FOOD_TABLE = 'food_product'
+FOOD_I18N_TABLE = 'food_producttranslation'
+CATEGORY_TABLE = 'food_category'
+CATEGORY_I18N_TABLE = 'food_categorytranslation'
+
 TRANSLATION_LANGUAGES = ['ru']
 
 FOOD_FILE = 'food.json'

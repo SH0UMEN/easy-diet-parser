@@ -17,14 +17,15 @@ def main():
     except pg.Error:
         return print('Error while connecting to PostgreSQL')
 
-    export(FOOD_FILE, 'food_product', cursor)
-    export(FOOD_I18N_FILE, 'food_producttranslation', cursor)
-    export(CATEGORIES_FILE, 'food_category', cursor)
-    export(CATEGORIES_I18N_FILE, 'food_categorytranslation', cursor)
+    export(FOOD_FILE, FOOD_TABLE, cursor)
+    export(FOOD_I18N_FILE, FOOD_I18N_TABLE, cursor)
+    export(CATEGORIES_FILE, CATEGORY_TABLE, cursor)
+    export(CATEGORIES_I18N_FILE, CATEGORY_I18N_TABLE, cursor)
 
     connection.commit()
     cursor.close()
     connection.close()
+
 
 def prepair(el):
     if isinstance(el, str):
