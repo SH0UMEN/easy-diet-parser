@@ -19,4 +19,4 @@ DB_NAME = 'database'
 DB_USERNAME = 'user'
 DB_PASSWORD = '1111'
 DB_HOST = 'localhost'
-DB_PORT = '3306'
+DB_PORT = 3306

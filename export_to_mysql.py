@@ -1,40 +1,37 @@
-import psycopg2 as pg
+import MySQLdb as sql
 from config import *
 import json
 
 
 def main():
     try:
-        connection = pg.connect(
+        db = sql.connect(
             user=DB_USERNAME,
-            password=DB_PASSWORD,
+            passwd=DB_PASSWORD,
             host=DB_HOST,
             port=DB_PORT,
-            database=DB_NAME
+            db=DB_NAME
         )
-
-        cursor = connection.cursor()
-    except pg.Error:
+    except sql.Error:
         return print('Error while connecting to PostgreSQL')
 
-    export(FOOD_FILE, FOOD_TABLE, cursor)
-    export(FOOD_I18N_FILE, FOOD_I18N_TABLE, cursor)
-    export(CATEGORIES_FILE, CATEGORY_TABLE, cursor)
-    export(CATEGORIES_I18N_FILE, CATEGORY_I18N_TABLE, cursor)
+    export(CATEGORIES_FILE, CATEGORY_TABLE, db)
+    export(CATEGORIES_I18N_FILE, CATEGORY_I18N_TABLE, db)
+    export(FOOD_FILE, FOOD_TABLE, db)
+    export(FOOD_I18N_FILE, FOOD_I18N_TABLE, db)
 
-    connection.commit()
-    cursor.close()
-    connection.close()
+    db.commit()
+    db.close()
 
 
 def prepair(el):
     if isinstance(el, str):
-        return 'E\'{}\''.format(el.replace('\'', '\\\''))
+        return '\'{}\''.format(el.replace('\'', '\\\''))
     else:
         return str(el)
 
 
-def export(filename, table_name, cursor):
+def export(filename, table_name, db):
     file = open(filename)
     data = json.loads(json.load(file))
 
@@ -48,7 +45,7 @@ def export(filename, table_name, cursor):
 
     query = 'INSERT INTO {}({}) VALUES {}'.format(table_name, ','.join(data[0].keys()), ','.join(values))
 
-    cursor.execute(query)
+    db.query(query)
 
     file.close()
 
